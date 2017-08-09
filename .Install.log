@@ -1,0 +1,36 @@
+Logfile for Installing Paasmer...
+/home/pi/SBC-CC3200-SDK-along-beaglebone-zigbee-testing-spandu/SBC-CC3200-SDK-along-beaglebone-zigbee-testing-1-working1-modified
+/home/root
+--> Installing...\n
+--> Installing requerments.......
+Configuring data...
+"a3rwl3kghmkdtx.iot.us-west-2.amazonaws.com"
+mobo1
+SSH is enabled and the default password for the 'pi' user has not been changed. This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password. { "thingArn": "arn:aws:iot:us-west-2:039065299133:thing/mobo1", "thingName": "mobo1" }
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+{
+    "certificateArn": "arn:aws:iot:us-west-2:039065299133:cert/46a7023cbf27f0bae97bb0b98281f6ca6e22690d3f23da733efcd1c367e7b6fc", 
+    "certificatePem": "-----BEGIN CERTIFICATE-----\nMIIDWjCCAkKgAwIBAgIVAON4KKBf3k4pllt6YXWG+mYblHN1MA0GCSqGSIb3DQEB\nCwUAME0xSzBJBgNVBAsMQkFtYXpvbiBXZWIgU2VydmljZXMgTz1BbWF6b24uY29t\nIEluYy4gTD1TZWF0dGxlIFNUPVdhc2hpbmd0b24gQz1VUzAeFw0xNzA4MDcxMDE5\nMDdaFw00OTEyMzEyMzU5NTlaMB4xHDAaBgNVBAMME0FXUyBJb1QgQ2VydGlmaWNh\ndGUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDQwVaxaN19im05jFLq\n3z0UUGMH1BXZRk4ZUGY2IlKPg2Yus3SZyDY80pf+RzLByJ0+i70jRqWiSuV3lfaW\nMdzom1QCSdKEcwXO1wsS3TcBZea51qXTB2p/G5kHuViUJWCxrkaCVIdSA1EKtfJ/\nzWoseXrX9+iRsCD405grThSKAljRGtXF996uojljJ9OIhk8nbl2akksYwZu2wznm\nEfkSjuMoDJtPyOfw/LjxKT6u4xoZoZQ3EhXDiJ20GDqDj7UcnPpsnQlfxjcvTRlM\nHsxLb+WzaIB7NHwttscGibFk+Bj2YYkWynlN+uh+zLTG4UMUJnG7xpIwaq2AuSLj\nwmUVAgMBAAGjYDBeMB8GA1UdIwQYMBaAFKUO+8m7TtIIvGAmBx8xUMl+GBvcMB0G\nA1UdDgQWBBSCz6nvglAF9n07U/aFY+MViC4aqDAMBgNVHRMBAf8EAjAAMA4GA1Ud\nDwEB/wQEAwIHgDANBgkqhkiG9w0BAQsFAAOCAQEAnr9DWyTZxR7cdBcW0isfGZfc\nATEhIo/MF7mRZwjuszPLX/a+tTnz95tsilnW59g1Jnm+EuIJUOiQwToed6atF2RM\nMK3Rdf0NZEXeUAtMjxoM4CRFpJMUhXs76/tEXb+vgSP5AXjkap1am0gjVA0ph9S/\nAghkmcnorn/Y4X8W7Y1b5vRlRkbMDynOe2s7ngLkbutnKsKzm9xkGvNwEzBIc8IV\nCQrz6amI71ZqvZ9nSVpfLf0f7rV+5fvs/Ukfi1W0eQ1hGoQ/SkqZhSot8MXybsa0\nGA8IhyEB4t33UprfVPvNTvNdFB5zTgcKKtjcjFTGQv9FquVKyO9vvHr5CZRdxw==\n-----END CERTIFICATE-----\n", 
+    "keyPair": {
+        "PublicKey": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0MFWsWjdfYptOYxS6t89\nFFBjB9QV2UZOGVBmNiJSj4NmLrN0mcg2PNKX/kcywcidPou9I0alokrld5X2ljHc\n6JtUAknShHMFztcLEt03AWXmudal0wdqfxuZB7lYlCVgsa5GglSHUgNRCrXyf81q\nLHl61/fokbAg+NOYK04UigJY0RrVxfferqI5YyfTiIZPJ25dmpJLGMGbtsM55hH5\nEo7jKAybT8jn8Py48Sk+ruMaGaGUNxIVw4idtBg6g4+1HJz6bJ0JX8Y3L00ZTB7M\nS2/ls2iAezR8LbbHBomxZPgY9mGJFsp5Tfrofsy0xuFDFCZxu8aSMGqtgLki48Jl\nFQIDAQAB\n-----END PUBLIC KEY-----\n", 
+        "PrivateKey": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEA0MFWsWjdfYptOYxS6t89FFBjB9QV2UZOGVBmNiJSj4NmLrN0\nmcg2PNKX/kcywcidPou9I0alokrld5X2ljHc6JtUAknShHMFztcLEt03AWXmudal\n0wdqfxuZB7lYlCVgsa5GglSHUgNRCrXyf81qLHl61/fokbAg+NOYK04UigJY0RrV\nxfferqI5YyfTiIZPJ25dmpJLGMGbtsM55hH5Eo7jKAybT8jn8Py48Sk+ruMaGaGU\nNxIVw4idtBg6g4+1HJz6bJ0JX8Y3L00ZTB7MS2/ls2iAezR8LbbHBomxZPgY9mGJ\nFsp5Tfrofsy0xuFDFCZxu8aSMGqtgLki48JlFQIDAQABAoIBAQCIpkatk0uJpleh\nWC3e+YruBUEOGtLCi7cL8wk1XnpU31rAL1CgaeK3JdPA67JaD4x/KNICiXhbKFPV\nWCE2aCWHTkZLyS847GJc53+kNZKQI7hI5i1eWnhoBBTEbZuCPoVxSfd10QdTtEAU\nls3KwxhBTLQRM4LV+0laGIh/sHjZbUh8TIlNiJw26W+cQ+2Loq2eAcJ0nM8J9fVa\nYUuPU5ol3TNnm1uKXW5ieakXUdE5zV5GiuCCl+SfP/pTzOJFSftL2MZbupGGbKT3\nYeE1cpStU27LpkVHwrNt8deG0NnoI294Au1X0vYmeQeupscDyFOJ4mWuZp+MlpuS\nEovnpR3xAoGBAPfLZWYKKuSzASvf73VvWTQn8iSvEo0G06HzVko89VlqngdnhY3E\nOdizYd7N9rXCyBciv6ip6lb/8CoBVtJT7AW06DVqp/JYAtTaaHNm1pkwG9HjOpTV\nYzgO8PYUsv7l9G9VhfrfSXJtS0mYO1CsfHWdBrFzY3WgNdJxz2HyfoE3AoGBANeq\n/6ky6/j1mqoiQ+K+Wf8XKt9Y9/+36XHNB3ScG6LeoTLMlsm4wwTViKRs45JICQN3\nV1DYOOl4vL98MdHd+v8F0Sk7hmZXtoWog8g/cDEyn9aeDBFrxFuIRKZVcZT2ti9G\n2v+arghrrsvZSCZKLzIiL1coKVwVq/CDSbiTNqITAoGBAMI/iQJ/r/ZOOPna9014\n91XChripIYK6Okb3icpylOb+hFlLls92Zt5waKWPkfoUcmRokhQ29wQyaGOVXylM\nLnaexXWyYWvCAJ45hK4KjOnTY8uaNH8d9ESqucw+l77oJ0DrqzbpuRrhgKZ1lvH7\n9SkB6pBK40n/SJHrM+YVgYPrAoGBAMOD5TRp0p0nYyh72dk0QfhM83P5fxKXkw21\nFt4zK6ayd6bK7KRBWKMIRlDx2jliDrHSvhivfKDD8TETEUM2H3aUunLL4OLk/7YZ\n+CZQxJAFWfxB2aTtctycI8g7S7YFF1KyxJTWkJFXteZdu9fihvjHHu2/ngc6Kl7n\nVqz64Jt7AoGAZO+3rjgzdyVEBO0sffl0lWjJZbiQu5Nndyj5qoDJmt0AGoLrZBHX\nm4A6wlQXs33ld5nopMvbS0QwRr4Lr8cT+XpT5cB96IXq5AjwlnJhorgZOFkBJO7q\nnb1W4G3qmLWJ3GNaaf1NRquYBjwYESYlMe0PZbe/o+f65lbPuuJNGhg=\n-----END RSA PRIVATE KEY-----\n"
+    }, 
+    "certificateId": "46a7023cbf27f0bae97bb0b98281f6ca6e22690d3f23da733efcd1c367e7b6fc"
+}
+"arn:aws:iot:us-west-2:039065299133:cert/46a7023cbf27f0bae97bb0b98281f6ca6e22690d3f23da733efcd1c367e7b6fc"
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+{
+    "policyName": "mobo1", 
+    "policyArn": "arn:aws:iot:us-west-2:039065299133:policy/mobo1", 
+    "policyDocument": "{ \"Version\": \"2012-10-17\", \"Statement\": [{\"Action\": [\"iot:*\"], \"Resource\": [\"*\"], \"Effect\": \"Allow\" }] }", 
+    "policyVersionId": "1"
+}
+Added to PAASMER alias...\n
+File Transfered successfully....
+mobo1
