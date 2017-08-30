@@ -20,7 +20,7 @@ In order to use the Zigbee the following is required.
 
 * Download the SDK or clone it using the command below.
 ```
-$ git clone github.com/PaasmerIoT/SBC-C-SDK-V2_0_1_4.git
+$ git clone https://github.com/PaasmerIoT/SBC-C-SDK-V2_0_1_4.git
 $ cd SBC-C-SDK-V2_0_1_4
 ```
 ## ZigBee Configuration (Optional)
