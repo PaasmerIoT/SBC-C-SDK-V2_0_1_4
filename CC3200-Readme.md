@@ -21,7 +21,7 @@ The following TI software products must be installed in order to build and run t
 
 * Download the SDK or clone it using the command below.
 ```
-$ git clone github.com/PaasmerIoT/SBC-C-SDK-V2_0_1_4
+$ git clone https://github.com/PaasmerIoT/SBC-C-SDK-V2_0_1_4.git
 $ cd SBC-C-SDK-V2_0_1_4
 ```
 
