@@ -1,9 +1,8 @@
-#include "../../../deviceName.h"
-#define UserName "padmanabham.pakki@gmail.com" //your user name in website
+#include "../../../details.h"
 
 #define timePeriod 6 //change the time delay as you required for sending actuator values to paasmer cloud
 
-char* feedname[]={"feed1","feed5"}; //feed names you use in the website
+char* feedname[]={"feed1","feed5"};  //Do not provide any spaces for the feeds.
 
 char* feedtype[]={"actuator","sensor"}; //modify with the type of feeds i.e., actuator or sensor
 
@@ -11,4 +10,8 @@ int feedpin[]={3,8}; //modify with the pin numbers which you connected devices (
 
 char* connectiontype[] = {"GPIO","zigbee"};
 
-#define zigbeePort "/dev/ttyUSB0"
+#define zigbeePort "/dev/ttyUSB0"  // comment this line if Zigbee is Used
+
+#define bluetoothDiscover  0
+
+#define wifiDiscover  0

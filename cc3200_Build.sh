@@ -2,7 +2,7 @@
 path=$(pwd);
 #logname="mdubuntu"
 logname=$(who | awk '{print $1}');
-deviceName=$(sudo cat ./deviceName.h | grep "DeviceName " | awk -F\" '{print $2}')
+deviceName=$(sudo cat ./details.h | grep "DeviceName " | awk -F\" '{print $2}')
 cd $(pwd)/sampl*/tirtos/certs/cc3200/
 #cd ./sampl*/tirtos/certs/cc3200/
 make clean && ~/ti/xdctools_*/gmake all;

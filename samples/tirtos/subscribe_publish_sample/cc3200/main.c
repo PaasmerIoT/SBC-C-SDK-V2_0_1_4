@@ -45,6 +45,7 @@
 extern void NetWiFi_init(void);
 extern void runAWSClient(void);
 extern void feedadd();
+extern void feedcheck();
 //extern void print();
 //extern void add(char *feednames,char *feedtypes,char *feedbases,char *feedpins);
 
@@ -82,7 +83,7 @@ void slTask(unsigned int arg0, unsigned int arg1)
      *  will go to UART0, the same as printf.
      */
     UARTUtils_systemInit(0);
-
+feedcheck();
 feedadd();
 
     /* Initialize SimpleLink */

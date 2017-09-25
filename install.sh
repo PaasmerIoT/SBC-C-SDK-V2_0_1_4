@@ -41,6 +41,7 @@ elif [ "${OS}" = "Linux" ] ; then
         sudo yum install -y expect
         sudo yum install -y mysql-client-core-5.7
 	sudo yum install -y mysql-client
+	sudo yum install -y uuid
 
     elif [ -f /etc/SuSE-release ] ; then
         DIST=`cat /etc/SuSE-release | tr "\n" ' '| sed s/VERSION.*//`
@@ -52,6 +53,7 @@ elif [ "${OS}" = "Linux" ] ; then
         sudo zypper install -y expect
         sudo zypper install -y mysql-client-core-5.7
 	sudo zypper install -y mysql-client
+	sudo zypper install -y uuid
     elif [ -f /etc/mandrake-release ] ; then
         DIST='Mandrake'
         PSUEDONAME=`cat /etc/mandrake-release | sed s/.*\(// | sed s/\)//`
@@ -66,6 +68,7 @@ elif [ "${OS}" = "Linux" ] ; then
         sudo apt-get install -y expect
         sudo apt-get install -y mysql-client-core-5.7
 	sudo apt-get install -y mysql-client
+	sudo apt-get install -y uuid
     elif [ -f /etc/lsb_version ] ; then
         DIST="ubuntu or Linux mint `cat /etc/lsb_version`"
         REV=""
@@ -76,6 +79,7 @@ elif [ "${OS}" = "Linux" ] ; then
         sudo apt-get install -y expect
         sudo apt-get install -y mysql-client-core-5.7
 	sudo apt-get install -y mysql-client
+	sudo apt-get install -y uuid
     elif [ -f /etc/fedora_version ] ; then
         DIST="fedora `cat /etc/lsb_version`"
         REV=""
@@ -86,6 +90,7 @@ elif [ "${OS}" = "Linux" ] ; then
         sudo dnf install -y expect
         sudo dnf install -y mysql-client-core-5.7
 	sudo dnf install -y mysql-client
+	sudo dnf install -y uuid
     elif [ -f /etc/gentoo_version ] ; then
         DIST="gentoo `cat /etc/lsb_version`"
         REV=""
@@ -96,6 +101,7 @@ elif [ "${OS}" = "Linux" ] ; then
         sudo dnf install -y expect
         sudo dnf install -y mysql-client-core-5.7
 	sudo dnf install -y mysql-client
+	sudo dnf install -y uuid
     fi
     if [ -f /etc/UnitedLinux-release ] ; then
         DIST="${DIST}[`cat /etc/UnitedLinux-release | tr "\n" ' ' | sed s/VERSION.*//`]"
@@ -116,15 +122,15 @@ echo "#define deviceType \"$xv\"" > $path/samples/linux/subscribe_publish_sample
 #wget -O ./certs/rootCA.crt https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem
 echo $xv
 if [ $xv = "raspberrypi" ] || [ $xv = "bananapi" ] || [ $xv = "orangepi" ] || [ $xv = "odroidxu4" ] ; then
-   echo 'correct'
+   echo 'SBC Board'
   # sudo tar -xf wiringPi.tar -C ../
    #sudo chmod -R 777 ../../*
    #sudo tar -xf subscribe_publish_sample.tar -C $path/samples/linux/
-else if [ $xv = "beaglebone" ] ; then
+else if [ $xv = "BBC" ] ; then
    #sudo apt-get install build-essential python-setuptools python-smbus
-   echo 'BBC'
+   echo 'Beagle Bone'
 
 else
-   echo 'wrong'
+   echo 'Unknown or Local system'
 fi
 fi

@@ -17,27 +17,32 @@ The following TI software products must be installed in order to build and run t
 - Install [TI-RTOS for CC32xx 2.16.00.08](http://downloads.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/tirtos/index.html) or higher.
 
 
-## Installation
+# Installation
 
 * Download the SDK or clone it using the command below.
 ```
-$ git clone github.com/PaasmerIoT/SBC-C-SDK-V2_0_1_4
+$ git clone https://github.com/PaasmerIoT/SBC-C-SDK-V2_0_1_4.git
 $ cd SBC-C-SDK-V2_0_1_4
 ```
 
-* To connect the device to Paasmer IoT Platfrom, the following steps need to be performed.
-
-
+* To install dependencies, follow the commands below
 ```
+$ sudo chmod 777 ./*
 $ sudo ./install.sh
 ```
-This will install all required softwares.
+This will take some time to install the required softwares and packages.
+
+## Device Registration
+The Device Registration can be done in two ways, either through Web UI or Using command line.
+
+#### Using Command line
+
 * To register the device to the Paasmer IoT Platform, the following command need to be executed.
 
 ```
 $ sudo ./paasmerDeviceRegistration.sh
 ```
-This will ask for the device name. Give a unique device name for your device and that must be alphanumeric[a-z A-Z 0-9].
+This will ask for the device name. Give a unique device name for your device and that must be alphanumeric without giving any spaces [a-z A-Z 0-9].
 
 * Upon successful completion of the above command, the following commands need to be executed.
 ```
@@ -50,6 +55,34 @@ echo "-->  6) exit "
 $ exit
 ```
 
+* Go to the diectory below.
+```
+$ cd samples/tirtos/subscribe_publish_sample/cc3200
+```
+
+* Edit the config.h file to include the user name(Email), device name, feed names and GPIO pin details.
+
+```c
+#define UserName "Email Address" //your user name in website
+
+#define timePeriod 6 //change the time delay as you required for sending actuator values to paasmer cloud
+
+char* feedname[]={"feed1","feed2","feed3","feed4","feed5",.....}; //feed names you use in the website
+
+char* feedtype[]={"actuator","sensor","sensor","actuator","actuator",.....}; //modify with the type of feeds i.e., actuator or sensor
+
+char* feedbase[]={"GPIOA1_BASE","GPIOA2_BASE","GPIOA3_BASE","GPIOA2_BASE","GPIOA2_BASE",.....}; //modify with the GPIO Bases which you connected the devices (actuator or sensor)
+
+char* feedpin[]={"0x10","0x2","0x30","0x40","0x50",.....}; //modify with GPIO Hexnumbers for the selected pin
+```
+
+
+#### Using Web UI
+* Login to http://dashboard.paasmer.co/, create a device and download the credentials.
+* Copy the credential files from downloaded `zip` file and place them in the `<certs>` directory of the SDK.
+* Copy the `config.h` file in the `< samples/linux/subscribe_publish_sample>`.
+
+## Fetching Certificates
 * To fetch the certificates, Go to the directory below and run the following command
 ```
 $ cd samples/tirtos/certs/cc3200
@@ -73,32 +106,16 @@ TIRTOS_INSTALL_DIR = home\logname\ti\tirtos_cc32xx_2_16_00_08
 TI_ARM_CODEGEN_INSTALL_DIR = home\logname\ti\ccsv6\tools\compiler\ti-cgt-arm_5.2.5
 ```
 
-* Go to the diectory below.
-```
-$ cd samples/tirtos/subscribe_publish_sample/cc3200
-```
+#### Other Modifications
 
-* Edit the config.h file to include the user name(Email), device name, feed names and GPIO pin details.
-
-```c
-#define UserName "Email Address" //your user name in website
-
-#define timePeriod 6 //change the time delay as you required for sending actuator values to paasmer cloud
-
-char* feedname[]={"feed1","feed2","feed3","feed4","feed5",.....}; //feed names you use in the website
-
-char* feedtype[]={"actuator","sensor","sensor","actuator","actuator",.....}; //modify with the type of feeds i.e., actuator or sensor
-
-char* feedbase[]={"GPIOA1_BASE","GPIOA2_BASE","GPIOA3_BASE","GPIOA2_BASE","GPIOA2_BASE",.....}; //modify with the GPIO Bases which you connected the devices (actuator or sensor)
-
-char* feedpin[]={"0x10","0x2","0x30","0x40","0x50",.....}; //modify with GPIO Hexnumbers for the selected pin
-```
 * Edit the wificonfig.h to include the SSID and Password of wifi network.
 ```c
 #define SSID "SSID"
 #define SECURITY_KEY "Password"
 #define SECURITY_TYPE SL_SEC_TYPE_WPA
 ```
+
+## Execution
 
 * After editing config.h and wificonfig.h go to the `<PAASMER-SDK_INSTALL_DIR>/`.
       

@@ -34,7 +34,7 @@
 
 /* USER STEP: Update these macros */
 #define SSID "SSID"
-#define SECURITY_KEY "Password"
+#define SECURITY_KEY "password"
 #define SECURITY_TYPE SL_SEC_TYPE_WPA
 
 #endif

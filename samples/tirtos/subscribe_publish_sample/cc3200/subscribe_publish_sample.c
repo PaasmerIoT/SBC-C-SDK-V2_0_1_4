@@ -65,8 +65,8 @@ typedef struct feed
 }FD;
 
 FD *hptr=NULL;
+void feedcheck();
 void feedadd();
-void print();
 void add(char *feednames,char *feedtypes,char *feedbases,char *feedpins);
 void add(char *feednames,char *feedtypes,char *feedbases,char *feedpins)
 {
@@ -94,6 +94,22 @@ void add(char *feednames,char *feedtypes,char *feedbases,char *feedpins)
 	new->pre=old;
 	}
 }
+void feedcheck(){
+	if(((sizeof(feedname)/sizeof(feedname[0])) == (sizeof(feedtype)/sizeof(feedtype[0]))) &&((sizeof(feedbase)/sizeof(feedbase[0]))== (sizeof(feedpin)/sizeof(feedpin[0])))){
+        if(((sizeof(feedname)/sizeof(feedname[0])) == (sizeof(feedbase)/sizeof(feedbase[0]))) &&((sizeof(feedtype)/sizeof(feedtype[0]))== (sizeof(feedpin)/sizeof(feedpin[0])))){
+                IOT_INFO("Starting the Execution......");}
+        else{
+                IOT_INFO("Error : Please check the Config file feed details.");
+                exit(0);
+        }
+
+//IOT_INFO("Starting the Execution......");
+}
+        else{
+                IOT_INFO("Error : Please check the Config file feed details.");
+                exit(0);
+        }
+}
 void feedadd(){
 
 	int i=0,j=0;
@@ -106,52 +122,7 @@ void feedadd(){
 		i++;
 		IOT_INFO("%d",i);
 	}while(i<j);
-	print();
-}
-void print()
-{
-	FD *ptr=hptr;
-int a[3],msgscount=0;
-char cPayload[1024],b[512],c[512],credentials[512];
-	while(ptr){
-		snprintf(cPayload,sizeof(cPayload),"\{\n\"feed1\":\"%s\",\n\"feed1type\":\"%s\",\n\"feed1base\":\"%s\",\"feed1pin\":\"%s\",\"feed1value\":\"%d\",",ptr->feedname,ptr->feedtype,ptr->feedbase,ptr->feedpin,GPIOPinRead(ptr->feedbase,ptr->feedpin));
-
-		ptr=ptr->next;
-		if(ptr)
-		{
-		snprintf(b,sizeof(b),"\n\"feed2\":\"%s\",\n\"feed2type\":\"%s\",\n\"feed2base\":\"%s\",\"feed2pin\":\"%s\",\"feed2value\":\"%d\",",ptr->feedname,ptr->feedtype,ptr->feedbase,ptr->feedpin,GPIOPinRead(ptr->feedbase,ptr->feedpin));
-
-		strcat(cPayload,b);
 	
-		ptr=ptr->next;
-		}
-		else
-		{
-		snprintf(b,sizeof(b),"\n\"feed2\":\"\",\n\"feed2type\":\"\",\n\"feed2base\":\"\",\n\"feed2pin\":\"\",\n\"feed2value\":\"\",\n");
-		strcat(cPayload,b);
-		
-		}
-		if(ptr){
-		snprintf(c,sizeof(c),"\n\"feed3\":\"%s\",\n\"feed3type\":\"%s\",\n\"feed3base\":\"%s\",\n\"feed3pin\":\"%s\",\n\"feed3value\":\"%d\"\n\}",ptr->feedname,ptr->feedtype,ptr->feedbase,ptr->feedpin,GPIOPinRead(ptr->feedbase,ptr->feedpin));
-	
-		strcat(cPayload,c);
-
-		ptr=ptr->next;
-		
-		}
-		else{
-		
-		snprintf(c,sizeof(c),"\n\"feed3\":\"\",\n\"feed3type\":\"\",\n\"feed3base\":\"\",\n\"feed3pin\":\"\",\n\"feed3value\":\"\"\}");
-		strcat(cPayload,c);
-		printf("\nEof linkedlist\n");}
-		snprintf(credentials,sizeof(credentials),"messagecount = %d",msgscount);
-		strcat(cPayload,credentials);
-		IOT_INFO("%s",cPayload);
-		strcpy(cPayload,"\0");
-		msgscount++;
-		
-		
-	}
 }
 
 
@@ -384,7 +355,7 @@ void runAWSClient(void)
         IOT_ERROR("Error subscribing (%d)", rc);
     }
 
-    char cPayload[512];
+    char cPayload[1024];
     
 	paramsQOS0.qos = QOS0;
     paramsQOS0.payload = (void *)cPayload;
@@ -426,7 +397,7 @@ void runAWSClient(void)
 				IOT_INFO("Original MAC id is %x",pMACAddress);
                 
 		
-				char feed2Details[256],feed3Details[256],Credentials[256];
+				char feed2Details[256],feed3Details[256],Credentials[300];
 				FD *ptr=hptr;
 				int feed1Value=0,feed2Value=0,feed3Value=0;
 
@@ -443,7 +414,7 @@ void runAWSClient(void)
 						feed1Value=0;
 					}
 
-					snprintf(cPayload,sizeof(cPayload),"\{\n\"feeds\":[\{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedbase\":\"%s\",\"feedpin\":\"%s\",\"feedvalue\":\"%d\"\},",ptr->feedname,ptr->feedtype,ptr->feedbase,ptr->feedpin,feed1Value);
+					snprintf(cPayload,sizeof(cPayload),"\{\n\"feeds\":[\{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedbase\":\"%s\",\"feedpin\":\"%s\",\"feedvalue\":\"%d\",\"ConnectionType\":\"GPIO\"\},",ptr->feedname,ptr->feedtype,ptr->feedbase,ptr->feedpin,feed1Value);
 
 					ptr=ptr->next;
 					feed1Value=0;
@@ -455,7 +426,7 @@ void runAWSClient(void)
 						else{
 							feed2Value=0;
 						}
-						snprintf(feed2Details,sizeof(feed2Details),"\n\{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedbase\":\"%s\",\"feedpin\":\"%s\",\"feedvalue\":\"%d\"\},",ptr->feedname,ptr->feedtype,ptr->feedbase,ptr->feedpin,feed2Value);
+						snprintf(feed2Details,sizeof(feed2Details),"\n\{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedbase\":\"%s\",\"feedpin\":\"%s\",\"feedvalue\":\"%d\",\"ConnectionType\":\"GPIO\"\},",ptr->feedname,ptr->feedtype,ptr->feedbase,ptr->feedpin,feed2Value);
 
 						strcat(cPayload,feed2Details);
 	
@@ -465,7 +436,7 @@ void runAWSClient(void)
 					}
 					else
 					{
-						snprintf(feed2Details,sizeof(feed2Details),"\n\{\"feedname\":\"\",\n\"feedtype\":\"\",\n\"feedbase\":\"\",\n\"feedpin\":\"\",\n\"feedvalue\":\"\"\},\n");
+						snprintf(feed2Details,sizeof(feed2Details),"\n\{\"feedname\":\"\",\n\"feedtype\":\"\",\n\"feedbase\":\"\",\n\"feedpin\":\"\",\n\"feedvalue\":\"\",\"ConnectionType\":\"\"\},\n");
 						strcat(cPayload,feed2Details);
 						
 					}
@@ -477,7 +448,7 @@ void runAWSClient(void)
 						else{
 							feed3Value=0;
 						}
-						snprintf(feed3Details,sizeof(feed3Details),"\n\{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedbase\":\"%s\",\n\"feedpin\":\"%s\",\n\"feedvalue\":\"%d\"\}],",ptr->feedname,ptr->feedtype,ptr->feedbase,ptr->feedpin,feed3Value);
+						snprintf(feed3Details,sizeof(feed3Details),"\n\{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedbase\":\"%s\",\n\"feedpin\":\"%s\",\n\"feedvalue\":\"%d\",\"ConnectionType\":\"GPIO\"\}],",ptr->feedname,ptr->feedtype,ptr->feedbase,ptr->feedpin,feed3Value);
 					
 						strcat(cPayload,feed3Details);
 				
@@ -488,11 +459,11 @@ void runAWSClient(void)
 					}
 					else{
 		
-						snprintf(feed3Details,sizeof(feed3Details),"\n\{\"feedname\":\"\",\n\"feedtype\":\"\",\n\"feedbase\":\"\",\n\"feedpin\":\"\",\n\"feedvalue\":\"\"\}],");
+						snprintf(feed3Details,sizeof(feed3Details),"\n\{\"feedname\":\"\",\n\"feedtype\":\"\",\n\"feedbase\":\"\",\n\"feedpin\":\"\",\n\"feedvalue\":\"\",\"ConnectionType\":\"\"\}],");
 						strcat(cPayload,feed3Details);
 						printf("\nEof linkedlist\n");
 					}
-					snprintf(Credentials,sizeof(Credentials),"\"messagecount\": \"%d\",\"paasmerid\":\"%x\",\"username\":\"%s\",\"devicename\":\"%s\",\"devicetype\":\"CC3200\"\}",msgCount,mac_id,UserName,DeviceName);
+					snprintf(Credentials,sizeof(Credentials),"\"messagecount\": \"%d\",\"paasmerid\":\"%x\",\"username\":\"%s\",\"devicename\":\"%s\",\"devicetype\":\"CC3200\",\"Language\": \"C\",\"ThingName\":\"%s\",\"ThingARN\":\"%s\"\}",msgCount,mac_id,UserName,DeviceName,ThingName,ThingArn);
 					strcat(cPayload,Credentials);
 					IOT_INFO("%s",cPayload);
 					IOT_INFO("%d\n",msgCount);

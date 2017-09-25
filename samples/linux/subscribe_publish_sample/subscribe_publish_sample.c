@@ -109,7 +109,7 @@ void feedadd(){
 		i++;
 		IOT_INFO("%d",i);
 	}while(i<j);
-	print();
+	
 	#ifdef AWS_IOT_MY_THING_NAME
 	    #define AWS_IOT_MY_THING_NAME DeviceName
 	#endif
@@ -118,58 +118,6 @@ void feedadd(){
 	    #define AWS_IOT_MQTT_CLIENT_ID DeviceName
 	#endif
 }
-void print()
-{
-	FD* ptr=hptr;
-//	struct feed* ptr=hptr;
-int a[3],msgscount=0;
-char cPayload[1024],b[512],c[512],credentials[512];
-	while(ptr){
-		IOT_INFO("this is in print function");
-		snprintf(cPayload,sizeof(cPayload),"{\n\"feed1\":\"%s\",\n\"feed1type\":\"%s\",\n\"feed1pin\":\"%d\",\"feed1value\":\"%d\",",ptr->feedname,ptr->feedtype,ptr->feedpin,ptr->feedpin);
-//		a[0]=1;
-		printf("%s\n",cPayload);
-		ptr=ptr->next;
-		if(ptr)
-		{
-		IOT_INFO("this is in second node");
-		snprintf(b,sizeof(b),"\n\"feed2\":\"%s\",\n\"feed2type\":\"%s\",\n\"feed2pin\":\"%d\",\"feed2value\":\"%d\",",ptr->feedname,ptr->feedtype,ptr->feedpin,ptr->feedpin);
-
-		strcat(cPayload,b);
-		printf("%s",cPayload);
-		ptr=ptr->next;
-		}
-		else
-		{
-		snprintf(b,sizeof(b),"\n\"feed2\":\"\",\n\"feed2type\":\"\",\n\"feed2pin\":\"\",\n\"feed2value\":\"\",\n");
-		strcat(cPayload,b);
-		
-		}
-		if(ptr){
-		snprintf(c,sizeof(c),"\n\"feed3\":\"%s\",\n\"feed3type\":\"%s\",\n\"feed3pin\":\"%d\",\n\"feed3value\":\"%d\"\n}",ptr->feedname,ptr->feedtype,ptr->feedpin,ptr->feedpin);
-	
-		strcat(cPayload,c);
-		printf("%s",cPayload);
-		//printf("%s",c);
-		ptr=ptr->next;
-		
-		}
-		else{
-		
-		snprintf(c,sizeof(c),"\n\"feed3\":\"\",\n\"feed3type\":\"\",\n\"feed3pin\":\"\",\n\"feed3value\":\"\"}");
-		strcat(cPayload,c);
-		printf("\nEof linkedlist\n");}
-		snprintf(credentials,sizeof(credentials),"messagecount = %d",msgscount);
-		strcat(cPayload,credentials);
-		IOT_INFO("%s",cPayload);
-		strcpy(cPayload,"\0");
-		msgscount++;
-		
-		
-	}
-}
-
-
 
 /**
  * @brief Default cert location
@@ -307,6 +255,21 @@ void parseInputArgsForConnectParams(int argc, char **argv) {
 
 int main(int argc, char **argv) {
 
+if(((sizeof(feedname)/sizeof(feedname[0])) == (sizeof(feedtype)/sizeof(feedtype[0]))) &&((sizeof(connectiontype)/sizeof(connectiontype[0]))== (sizeof(feedpin)/4))){
+        if(((sizeof(feedname)/sizeof(feedname[0])) == (sizeof(connectiontype)/sizeof(connectiontype[0]))) &&((sizeof(feedtype)/sizeof(feedtype[0]))== (sizeof(feedpin)/4))){
+                IOT_INFO("Starting the Execution......");}
+        else{
+                IOT_INFO("Error : Please check the Config file feed details.");
+                exit(0);
+        }
+}
+else{
+        IOT_INFO("Error : Please check the Config file feed details.");
+        exit(0);
+    }
+
+	
+
 gpioSetup();
 
 
@@ -321,7 +284,7 @@ feedadd();
 	char clientCRT[PATH_MAX + 1];
 	char clientKey[PATH_MAX + 1];
 	char CurrentWD[PATH_MAX + 1];
-	char cPayload[512];
+	char cPayload[1024];
 
 	int32_t i = 0;
 
@@ -432,7 +395,7 @@ if(((timedelay++)%timePeriod)==0){
 
 
 	////added for new architecture
-	char feed2Details[256],feed3Details[256],Credentials[256];
+	char feed2Details[256],feed3Details[256],Credentials[325];
 				FD *ptr=hptr;
 				int feed1Value=0,feed2Value=0,feed3Value=0;
 
@@ -441,7 +404,7 @@ if(((timedelay++)%timePeriod)==0){
 						feed1Value = gpioRead(ptr->feedpin);
 					else
 						feed1Value = paasmerZigbeeRead(ptr->feedpin);
-					snprintf(cPayload,sizeof(cPayload),"{\n\"feeds\":[{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedpin\":\"%d\",\"feedvalue\":\"%d\"},",ptr->feedname,ptr->feedtype,ptr->feedpin,feed1Value);
+					snprintf(cPayload,sizeof(cPayload),"{\n\"feeds\":[{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedpin\":\"%d\",\"feedvalue\":\"%d\",\"ConnectionType\":\"%s\"},",ptr->feedname,ptr->feedtype,ptr->feedpin,feed1Value,ptr->connectiontype);
 
 					ptr=ptr->next;
 					feed1Value=0;
@@ -453,7 +416,7 @@ if(((timedelay++)%timePeriod)==0){
 						else
 							feed2Value = paasmerZigbeeRead(ptr->feedpin);
 
-						snprintf(feed2Details,sizeof(feed2Details),"\n{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedpin\":\"%d\",\"feedvalue\":\"%d\"},",ptr->feedname,ptr->feedtype,ptr->feedpin,feed2Value);
+						snprintf(feed2Details,sizeof(feed2Details),"\n{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedpin\":\"%d\",\"feedvalue\":\"%d\",\"ConnectionType\":\"%s\"},",ptr->feedname,ptr->feedtype,ptr->feedpin,feed2Value,ptr->connectiontype);
 
 						strcat(cPayload,feed2Details);
 	
@@ -463,7 +426,7 @@ if(((timedelay++)%timePeriod)==0){
 					}
 					else
 					{
-						snprintf(feed2Details,sizeof(feed2Details),"\n{\"feedname\":\"\",\n\"feedtype\":\"\",\n\"feedpin\":\"\",\n\"feedvalue\":\"\"},\n");
+						snprintf(feed2Details,sizeof(feed2Details),"\n{\"feedname\":\"\",\n\"feedtype\":\"\",\n\"feedpin\":\"\",\n\"feedvalue\":\"\",\"ConnectionType\":\"\"},\n");
 						strcat(cPayload,feed2Details);
 						
 					}
@@ -473,7 +436,7 @@ if(((timedelay++)%timePeriod)==0){
 							feed3Value = gpioRead(ptr->feedpin);
 						else
 							feed3Value = paasmerZigbeeRead(ptr->feedpin);
-						snprintf(feed3Details,sizeof(feed3Details),"\n{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedpin\":\"%d\",\n\"feedvalue\":\"%d\"}],",ptr->feedname,ptr->feedtype,ptr->feedpin,feed3Value);
+						snprintf(feed3Details,sizeof(feed3Details),"\n{\"feedname\":\"%s\",\n\"feedtype\":\"%s\",\n\"feedpin\":\"%d\",\n\"feedvalue\":\"%d\",\"ConnectionType\":\"%s\"}],",ptr->feedname,ptr->feedtype,ptr->feedpin,feed3Value,ptr->connectiontype);
 					
 						strcat(cPayload,feed3Details);
 				
@@ -484,11 +447,11 @@ if(((timedelay++)%timePeriod)==0){
 					}
 					else{
 		
-						snprintf(feed3Details,sizeof(feed3Details),"\n{\"feedname\":\"\",\n\"feedtype\":\"\",\n\"feedpin\":\"\",\n\"feedvalue\":\"\"}],");
+						snprintf(feed3Details,sizeof(feed3Details),"\n{\"feedname\":\"\",\n\"feedtype\":\"\",\n\"feedpin\":\"\",\n\"feedvalue\":\"\",\"ConnectionType\":\"\"}],");
 						strcat(cPayload,feed3Details);
 						printf("\nEof linkedlist\n");
 					}
-					snprintf(Credentials,sizeof(Credentials),"\"messagecount\": \"%d\",\"paasmerid\":\"%s\",\"username\":\"%s\",\"devicename\":\"%s\",\"devicetype\":\"SBC\"}",msgCount,MAC,UserName,DeviceName);
+					snprintf(Credentials,sizeof(Credentials),"\"messagecount\": \"%d\",\"paasmerid\":\"%s\",\"username\":\"%s\",\"devicename\":\"%s\",\"devicetype\":\"SBC\",\"Language\": \"C\",\"Bluetooth\":\"%d\",\"Wifi\":\"%d\",\"ThingName\":\"%s\",\"ThingARN\":\"%s\"}",msgCount,MAC,UserName,DeviceName,bluetoothDiscover,wifiDiscover,ThingName,ThingArn);
 					strcat(cPayload,Credentials);
 					IOT_INFO("%s",cPayload);
 					IOT_INFO("%d\n",msgCount);
@@ -498,7 +461,7 @@ if(((timedelay++)%timePeriod)==0){
 		
 					
 					paramsQOS1.payloadLen = strlen(cPayload);
-                rc = aws_iot_mqtt_publish(&client, "paasmerv2_device_online",23, &paramsQOS1);
+                rc = aws_iot_mqtt_publish(&client, "paasmerv2_device_online",31, &paramsQOS1);
                 if (rc == MQTT_REQUEST_TIMEOUT_ERROR) {
                         IOT_WARN("QOS1 publish ack not received.\n");
                         rc = SUCCESS;

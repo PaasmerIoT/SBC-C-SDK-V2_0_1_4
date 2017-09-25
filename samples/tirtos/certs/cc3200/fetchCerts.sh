@@ -1,6 +1,12 @@
 #!/bin/bash
+echo `rm -rf configure.h`
 #deviceName=$(sudo cat ../../subscribe_publish_sample/cc3200/config.h | grep "DeviceName" | awk '{print $2}')
-deviceName=$(sudo cat ../../../../deviceName.h | grep "DeviceName " | awk -F\" '{print $2}')
+if [ -f ../../../../details.h ] ; then
+	deviceName=$(sudo cat ../../../../details.h | grep "DeviceName " | awk -F\" '{print $2}')
+else 
+	deviceName=$(sudo cat ../../subscribe_publish_sample/cc3200/config.h | grep "DeviceName" | awk '{print $2}')
+fi
+
 
 certpem=$(while read -r line; do   echo "\"$line\"" |sed -n '/CERTIFICATE/!p' ; done < "../../../../certs/$deviceName-certificate.pem.crt");
 

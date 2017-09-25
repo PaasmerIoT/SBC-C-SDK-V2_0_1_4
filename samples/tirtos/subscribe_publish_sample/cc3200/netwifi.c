@@ -367,6 +367,7 @@ System_printf("15\n");
         
         Task_sleep(50);
 System_printf("17\n");
+}
 wificount++;
 if(wificount > 3000){
 		System_printf("Taking too much time to connect to wifi network. please check your wifi credentials or wifi network speed\n");
