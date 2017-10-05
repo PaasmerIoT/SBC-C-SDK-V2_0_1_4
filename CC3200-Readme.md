@@ -79,7 +79,7 @@ char* feedpin[]={"0x10","0x2","0x30","0x40","0x50"}; //modify with GPIO Hexnumbe
 
 
 #### Using Web UI
-* Login to http://dashboard.paasmer.co/, create a device and download the credentials.
+* Login to http://developers.paasmer.co/, create a device and download the credentials.
 * Copy the credential files from downloaded `zip` file and place them in the `<certs>` directory of the SDK.
 * Copy the `config.h` file in the `< samples/linux/subscribe_publish_sample>`.
 
