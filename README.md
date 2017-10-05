@@ -21,3 +21,4 @@ Registration on the  [PAASMER portal](http://developers.paasmer.co/) is necessar
 ## Installation
 * For SBC, refer SBC-Readme.md
 * For CC3200, refer CC3200-Readme.md
+
