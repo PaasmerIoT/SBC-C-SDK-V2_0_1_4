@@ -16,7 +16,7 @@ The **SBC-C-SDK-V2_0_1_4** is equipped with the Zigbee protocol support along wi
 
 ## Pre Requisites
 
-Registration on the  [PAASMER portal](http://dashboard.paasmer.co/) is necessary to connect the devices to the **Paasmer IoT Platfrom** .
+Registration on the  [PAASMER portal](http://developers.paasmer.co/) is necessary to connect the devices to the **Paasmer IoT Platfrom** .
 
 ## Installation
 * For SBC, refer SBC-Readme.md
